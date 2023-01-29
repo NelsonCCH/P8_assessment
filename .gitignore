@@ -1,0 +1,4 @@
+.idea
+.pytest_cache
+node_modules
+venv/
