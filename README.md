@@ -2,10 +2,10 @@
 
 ## Description
 
-A simple mortgage calculator, with a small frontend to interact with.
-User will provide parameters to the API, and get the calculated payment with 200 status code.
-Both frontend and backend will check for valid inputs. 
-For invalid inputs, API will return error message with 400 status code, and users will be alerted for the invalid ones. 
+A simple mortgage calculator, with a small frontend to interact with.\
+User will provide parameters to the API, and get the calculated payment with 200 status code.\
+Both frontend and backend will check for valid inputs. \
+For invalid inputs, API will return error message with 400 status code, and users will be alerted for the invalid ones. \
 
 ## Project Structure
 1. Frontend - React
