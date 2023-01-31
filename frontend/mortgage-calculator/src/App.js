@@ -7,16 +7,14 @@ function App() {
     const [payment, setPayment] = useState(0);
     const [inputs, setInputs] = useState({});
 
-    // submit get request to backend endpoint, give alert for invalid inputs
+    // submit get request to backend endpoint, give alert and error hints for invalid inputs
     const handleSubmit = async (event) => {
       event.preventDefault();
-      let response = await fetch('/calculate_mortgage_payment?' + new URLSearchParams({
-        price: inputs.price,
-        down_payment: inputs.down_payment,
-        rate: inputs.rate,
-        amortization: inputs.amortization,
-        payment_schedule: inputs.payment_schedule,
-      }))
+      let response = await fetch('/calculate_mortgage_payment?', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(inputs)
+      })
 
       let result = await response.json()
       if (response.ok) {
@@ -26,9 +24,9 @@ function App() {
       }
     }
 
-    // set the request params when user inputs values
+    // convert inputs into float if they are numbers
     const handleInputChange = (e) => {
-      setInputs({...inputs, [e.target.name]: e.target.value});
+      setInputs({...inputs, [e.target.name]: e.target.type === 'number' ? parseFloat(e.target.value) : e.target.value});
     };
   
     // for dropdown menu's options
@@ -55,7 +53,7 @@ function App() {
         <form onSubmit={handleSubmit}>
 
           <label> Property Price: </label>
-          <input required type="number" name="price" onChange={handleInputChange}/><br></br>
+          <input required type="number" name="price" min="0" onChange={handleInputChange}/><br></br>
 
           <label> Down payment: </label>
           <input required type="number" name="down_payment" min="0" max={inputs.price} onChange={handleInputChange}/><br></br>
